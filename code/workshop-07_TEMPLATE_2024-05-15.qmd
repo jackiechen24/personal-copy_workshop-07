@@ -1,7 +1,7 @@
 ---
 title: "ENVS 193DS Workshop 7"
 date: 2024-05-15
-author: "insert your name here"
+author: "Jackie Chen"
 format: html
 ---
 
@@ -29,11 +29,11 @@ Look at the file structure in this repository.
 
 Where is this `.qmd` file? Where is the `abalone_growth.csv` file?  
 
-_insert response here_  
+The `.qmd` file is the code folder, while the `abalone_growth.csv` file is in the data folder.
 
-Note the file path within the `read_csv()` function. How is this different from how we've stored and read data before?  
+Note the file path within the `read_csv()` function. How is this different from how we've stored and read data before?
 
-_insert response here_  
+This is different from how we stored and read data before by that here() was used instead of providing the file path to store and read data. 
 
 **COMMIT AND PUSH YOUR CHANGES!**
 
@@ -55,7 +55,7 @@ class(abalone)
 
 Compare the three ways of looking at data below. What's different about the outputs, and what's similar?  
 
-_insert response below_
+All of the three ways provide information about the data. While str and glimpse provide several values of temperature and data, class does not. Moreover, str has temperature and growth as num [1:27] but specifies these attributes afterwards as temperature = col_double() and growth = col_double(), while glimpse directly specifies temperature and growth as dbl (double).
 
 **COMMIT AND PUSH YOUR CHANGES!**
 
@@ -70,7 +70,10 @@ Annotate the code to make `abalone_plot`. Make the plot look better by:
 abalone_plot <- ggplot(data = abalone,
                        aes(x = temperature,
                            y = growth)) +
-  geom_point()
+  geom_point() +
+  theme(# getting rid of gridlines
+    panel.grid = element_blank()
+  )
 
 abalone_plot
 ```
@@ -86,8 +89,9 @@ _model in words here_
 Annotate the code to create the model object `abalone_model`.
 
 ```{r abalone-model}
+# create model object `abalone_model` using growth and temperature variables
 abalone_model <- lm(growth ~ temperature,
-                    data = abalone)
+                    data = abalone) # use abalone as data for model
 ```
 
 **COMMIT AND PUSH YOUR CHANGES!**
@@ -97,6 +101,7 @@ abalone_model <- lm(growth ~ temperature,
 Look at the four diagnostic plots for this model. Annotate the code.
 
 ```{r abalone-model-diagnostics}
+# check for outliers and normality with the four diagnostic plots
 par(mfrow = c(2, 2))
 plot(abalone_model)
 ```
@@ -108,13 +113,13 @@ plot(abalone_model)
 Use `summary()` to look at the model coefficients (slope and intercept) and standard error (precision of the coefficient).
 
 ```{r abalone-model-summary}
-summary(abalone_model) 
+summary(abalone_model)
 ```
 
 Make a note of the y-intercept and slope estimates below with the standard error. Round the estimate and standard error to two decimal places.    
 
-_Slope: insert slope and SE here_  
-_y-intercept: insert intercept and SE here_  
+_Slope: -0.70 ± 0.05_
+_y-intercept: 16.41 ± 0.70_
 
 **COMMIT AND PUSH YOUR CHANGES!**
 
@@ -125,15 +130,16 @@ Get the model predictions using `ggeffect::ggpredict()`.
 Annotate the code below.
 
 ```{r abalone-model-predictions}
+# get model predictions for abalone growth in abalone_model
 model_preds <- ggpredict(abalone_model,
                          terms = "temperature")
 ```
 
-Look at the `model_preds` object in two ways: using `View(model_preds)` in your console and by displaying the output just running `model_preds`.  
+Look at the `model_preds` object in two ways: using `View(model_preds)` in your console and by displaying the output just running `model_preds`. 
 
 Compare the two outputs. How are they different?  
 
-_compare outputs here_  
+The outputs are different by that View(model_preds) has the output in a tab and having more columns for model_preds, while displaying the output just running `model_preds` has the output in the console for values of temperature, predicted, and the 95% CI (using the lower and upper bounds of the confidence interval). Unlike View(model_preds), the lower and upper bounds of the 95% CI when running `model_preds` are not in separate columns.
 
 **Note:** you can rename columns in your object from `ggpredict()` to make the data frame easier to work with. For example, you can change `x` to whatever your `x` variable is (in this case, `temperature`), and `predicted` to whatever your `y` variable is (in this case, `growth`). If you do this, you'll have to modify the code below to run.  
 
@@ -160,8 +166,10 @@ abalone_model_plot <- ggplot(data = abalone,
   geom_line(data = model_preds,
             aes(x = x,
                 y = predicted),
-            linewidth = 1)
-
+            linewidth = 1) +
+  theme(# getting rid of gridlines
+    panel.grid = element_blank()
+  )
 
 abalone_model_plot
 ```
@@ -203,7 +211,7 @@ See the [Git/GitHub resource](https://spring-2024.envs-193ds.com/resources/using
 
 Find the url for your rendered .html document. Make sure it looks like `yourgithubusername.github.io/repo/filepath/filename.html`. Enter it below.  
 
-_enter your url here_  
+jackiechen24.github.io/personal-copy_week-07/code/workshop-07_TEMPLATE_2024-05-15.html
 
 **COMMIT AND PUSH YOUR CHANGES!**  
 
@@ -211,7 +219,7 @@ _enter your url here_
 
 Read the [README resource](https://spring-2024.envs-193ds.com/resources/writing-a-readme) (also on Canvas for reference).  
 
-Find the `README` in this repository in RStudio.  
+Find the `README` in this repository in RStudio.
 
 Write sections for: "General information", "Data and file overview", and "Rendered output".    
 
