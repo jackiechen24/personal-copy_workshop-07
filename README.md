@@ -8,4 +8,4 @@ I (Jackie Chen) worked on this repo created by Caitlin Nordheim-Maestas to pract
 The data file is in .csv format, and it consists of the variables temperature (in Celsius) and growth (abalone growth). The data was accessed on May 16, 2024. The workshop-07_TEMPLATE_2024-05-15.qmd file provides code that looks at the data in greater detail, including visualizing and analyzing the data. The rendered HTML is the HTML version of this .qmd file.
 
 ## Rendered output
-[Rendered HTML Document](https://jackiechen24.github.io/personal-copy_week-07/code/workshop-07_TEMPLATE_2024-05-15.html)
+[Rendered HTML Document](https://jackiechen24.github.io/personal-copy_workshop-07/code/workshop-07_TEMPLATE_2024-05-15.html)
